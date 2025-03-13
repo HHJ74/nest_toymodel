@@ -3,7 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CourseModule } from './course/course.module';
+import { SubPtModule } from './sub_pt/sub_pt.module';
 import * as dotenv from 'dotenv';
+import { SubStations } from './sub_pt/sub_pt.entitiy';
+import { UserModule } from './user/user.module';
 
 dotenv.config(); // .env 파일 로드
 
@@ -18,9 +21,12 @@ dotenv.config(); // .env 파일 로드
       password: process.env.CLOUDSQL_PASS,
       database: process.env.CLOUDSQL_DB,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: false, //True는 개발모드에서만
+      // entities: [SubStations],
+      synchronize: false, //true는 개발모드에서만
     }),
     CourseModule,
+    SubPtModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
