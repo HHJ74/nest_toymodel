@@ -9,3 +9,5 @@ RUN npm ci
 COPY . ./
 
 ENTRYPOINT [ "npm", "run", "start" ]
+
+EXPOSE 8080
