@@ -10,7 +10,7 @@ locker_df = pd.read_csv("locker.csv") # 보관함 정보 파일
 # 숫자가 나오기 전까지를 역 이름으로 추출 (예: '서울역1~13' → '서울역') 
 locker_df["역사명"] = locker_df["보관함"].str.extract(r"^([^\d]+)") 
 locker_df.to_csv("locker_output.csv", index=False)
-s
+
 # '역 이름' 칼럼을 기준으로 비교하여 True/False 설정
 subway_df["보관함"] = subway_df["역사명"].isin(locker_df["역사명"])
 

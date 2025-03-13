@@ -1,7 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { CourseService } from './course.service';
 import { Course } from './course.entitiy';
-import { courseNeaybySub } from './dto/bldg-nearby-dto';
+import { courseNeaybySub } from './dto/course-nearby-dto';
 
 @Controller('course')
 export class CourseController {

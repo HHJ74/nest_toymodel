@@ -22,7 +22,7 @@ dotenv.config(); // .env 파일 로드
       database: process.env.CLOUDSQL_DB,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       // entities: [SubStations],
-      synchronize: false, //true는 개발모드에서만
+      synchronize: true, //true는 개발모드에서만
     }),
     CourseModule,
     SubPtModule,

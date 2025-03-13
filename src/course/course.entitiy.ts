@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity({schema:"first-toymodel", name:"courses"})
+@Entity({schema:"toymodel", name:"courses"})
 export class Course {
     @PrimaryGeneratedColumn()
     course_id: number;
