@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { SubPtService } from './sub_pt.service';
-import { SubStations } from './sub_pt.entitiy';
+import { SubStations } from './sub_pt.entity';
 
 @Controller('sub-pt')
 export class SubPtController {

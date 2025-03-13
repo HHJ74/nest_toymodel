@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CourseModule } from './course/course.module';
 import { SubPtModule } from './sub_pt/sub_pt.module';
 import * as dotenv from 'dotenv';
-import { SubStations } from './sub_pt/sub_pt.entitiy';
+import { SubStations } from './sub_pt/sub_pt.entity';
 import { UserModule } from './user/user.module';
 
 dotenv.config(); // .env 파일 로드

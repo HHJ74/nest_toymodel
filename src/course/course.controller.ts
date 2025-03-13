@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { CourseService } from './course.service';
-import { Course } from './course.entitiy';
+import { Course } from './course.entity';
 import { courseNeaybySub } from './dto/course-nearby-dto';
 
 @Controller('course')
