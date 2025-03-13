@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CourseModule } from './course/course.module';
 import * as dotenv from 'dotenv';
 
 dotenv.config(); // .env 파일 로드
@@ -19,6 +20,7 @@ dotenv.config(); // .env 파일 로드
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: false, //True는 개발모드에서만
     }),
+    CourseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
