@@ -1,29 +1,33 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Course } from './course.entity';
+import { CreateCourseDto } from './dto/create-course-dto';
+
 
 @Injectable()
 export class CourseService {
-    constructor(
-        @InjectRepository(Course)
-        private courseReopsitory: Repository<Course>
-    ){}
+  constructor(
+    @InjectRepository(Course)
+    private courseRepository: Repository<Course>,
+  ) {}
 
-    async findAll():Promise<Course[]> {
-        return this.courseReopsitory.find();
-    }
+  async createCourse(createCourseDto: CreateCourseDto): Promise<Course> {
+    const { user_id, content, points, status } = createCourseDto;
 
-    async findNearby(x:number, y:number, radius:number): Promise<Course[]>{
-        return this.courseReopsitory
-        .createQueryBuilder('courses')
-        .where(
-            `ST_Distance(
-                ST_SetSRID(ST_MakePoint(:x, :y),4326)::geography,
-                courses.course_line::geography
-                ) <= :radius`,
-            {x, y, radius},
-        )
-        .getMany();
-    }
+    // 포인트 배열을 GeoJSON LineString으로 변환
+    const course_line = {
+      type: 'LineString',
+      coordinates: points.map(point => [point.longitude, point.latitude]), // [경도, 위도] 순서
+    };
+
+    const course = this.courseRepository.create({
+      user_id,
+      content,
+      course_line,
+      status,
+    });
+
+    return this.courseRepository.save(course);
+  }
 }

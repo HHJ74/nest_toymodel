@@ -1,19 +1,19 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
 import { CourseService } from './course.service';
-import { Course } from './course.entity';
-import { courseNeaybySub } from './dto/course-nearby-dto';
+import { CreateCourseDto } from './dto/create-course-dto';
 
-@Controller('course')
+
+@Controller('courses')
 export class CourseController {
-    constructor(private CourseService: CourseService) {}
-
-    @Get()
-    async findAll(): Promise<Course[]>{
-        return this.CourseService.findAll();
-    }
-
-    // @Get('nearby')
-    // async FindNearby(@Query() quary:courseNeaybySub): Promise<Course[]>{
-    //     return this.CourseService.findNearby(quary.x, quary.y, quary.radius);
-    // }
+  constructor(private readonly courseService: CourseService) {}
+ß
+  @Post('/save-points')
+  @HttpCode(HttpStatus.CREATED)
+  async savePoints(@Body() createCourseDto: CreateCourseDto) {
+    const savedCourse = await this.courseService.createCourse(createCourseDto);
+    return {
+      message: 'Route saved successfully',
+      courseId: savedCourse.course_id,
+    };
+  }
 }
